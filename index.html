@@ -19,17 +19,38 @@ Permiso de Circulacion Petorca
   <div id="resultado"></div>
 
   <script>
-    const datosValidos = {
-      "ABC123": { nombre: "Juan Pérez", estado: "Válido" },
-      "XYZ789": { nombre: "Ana Gómez", estado: "Válido" }
-    };
+const datosValidos = {
+  "ABC123": {
+    nombre: "Juan Pérez",
+    estado: "Válido",
+    patente: "XY-1234",
+    vencimiento: "2025-12-31",
+    tipoVehiculo: "Camioneta",
+    comuna: "Petorca"
+  },
+  "XYZ789": {
+    nombre: "Ana Gómez",
+    estado: "Válido",
+    patente: "AB-9876",
+    vencimiento: "2025-10-15",
+    tipoVehiculo: "Sedán",
+    comuna: "Petorca"
+  }
+};
 
-    function validar() {
-      const codigo = document.getElementById("codigo").value.trim();
-      const resultado = document.getElementById("resultado");
-      if (datosValidos[codigo]) {
-        resultado.innerHTML = `<p><strong>Nombre:</strong> ${datosValidos[codigo].nombre}<br><strong>Estado:</strong> ${datosValidos[codigo].estado}</p>`;
-      } else {
+  if (datos) {
+    resultado.innerHTML = `
+      <p><strong>Nombre:</strong> ${datos.nombre}</p>
+      <p><strong>Estado:</strong> ${datos.estado}</p>
+      <p><strong>Patente:</strong> ${datos.patente}</p>
+      <p><strong>Vencimiento:</strong> ${datos.vencimiento}</p>
+      <p><strong>Tipo de Vehículo:</strong> ${datos.tipoVehiculo}</p>
+      <p><strong>Comuna:</strong> ${datos.comuna}</p>
+    `;
+  } else {
+    resultado.innerHTML = "<p style='color:red;'>Código no válido</p>";
+  }
+} else {
         resultado.innerHTML = "<p style='color:red;'>Código no válido</p>";
       }
     }
