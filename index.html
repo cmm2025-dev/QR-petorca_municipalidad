@@ -2,60 +2,114 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Validación de Datos Permiso de Circulacion 2025</title>
+  <title>Validación de Permiso</title>
   <style>
-    body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
-    input, button { margin: 10px 0; padding: 8px; width: 100%; }
-    .valido { color: green; }
-    .invalido { color: red; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3498db;
+    }
+    .resultado {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    .valido {
+      background-color: #dff0d8;
+      color: #3c763d;
+    }
+    .invalido {
+      background-color: #f2dede;
+      color: #a94442;
+    }
   </style>
 </head>
 <body>
-  <h2>Validación de Permiso de Circulación 2025</h2>
-  <label for="codigo">Ingrese Patente</label>
-  <input type="text" id="codigo" placeholder="Ej: ABC123">
-  <button onclick="validar()">Validar</button>
-  <div id="resultado"></div>
+  <div class="container">
+    <h2>Validación de Permiso</h2>
+    <label for="serie">Serie del documento</label>
+    <input type="text" id="serie" placeholder="Ej: 1119917">
+    
+    <label for="placa">Placa patente</label>
+    <input type="text" id="placa" placeholder="Ej: THZY34">
+    
+    <button onclick="validar()">Validar</button>
+    
+    <div id="resultado" class="resultado"></div>
+  </div>
 
   <script>
-    const datosValidos = {
-      "KRYY83": {
-        nombre: "César Mejías Marchant",
+    const permisos = {
+      "1119917|THZY34": {
+        nombre: "Carlos Muñoz",
         estado: "Válido",
-        patente: "KRYY83",
-        vencimiento: "31-03-2026",
-        tipoVehiculo: "Subaru 2.0 AWD",
-        comuna: "Petorca"
-      },
-      "XYZ789": {
-        nombre: "Ana Gómez",
-        estado: "Válido",
-        patente: "AB-9876",
-        vencimiento: "2025-10-15",
-        tipoVehiculo: "Sedán",
+        vencimiento: "2025-12-31",
+        tipoVehiculo: "SUV",
         comuna: "Petorca"
       }
     };
 
     function validar() {
-      const codigo = document.getElementById("codigo").value.trim();
+      const serie = document.getElementById("serie").value.trim();
+      const placa = document.getElementById("placa").value.trim().toUpperCase();
+      const clave = `${serie}|${placa}`;
       const resultado = document.getElementById("resultado");
-      const datos = datosValidos[codigo];
 
-      if (datos) {
+      if (permisos[clave]) {
+        const info = permisos[clave];
+        resultado.className = "resultado valido";
         resultado.innerHTML = `
-          <div class="valido">
-            <p><strong>Nombre:</strong> ${datos.nombre}</p>
-            <p><strong>Estado:</strong> ${datos.estado}</p>
-            <p><strong>Patente:</strong> ${datos.patente}</p>
-            <p><strong>Vencimiento:</strong> ${datos.vencimiento}</p>
-            <p><strong>Tipo de Vehículo:</strong> ${datos.tipoVehiculo}</p>
-            <p><strong>Comuna:</strong> ${datos.comuna}</p>
-          </div>
+          <p><strong>Nombre:</strong> ${info.nombre}</p>
+          <p><strong>Estado:</strong> ${info.estado}</p>
+          <p><strong>Vencimiento:</strong> ${info.vencimiento}</p>
+          <p><strong>Tipo de Vehículo:</strong> ${info.tipoVehiculo}</p>
+          <p><strong>Comuna:</strong> ${info.comuna}</p>
         `;
       } else {
-        resultado.innerHTML = "<p class='invalido'>Código no válido</p>";
-         }
+        resultado.className = "resultado invalido";
+        resultado.innerHTML = `<p>Permiso no válido. Verifique los datos ingresados.</p>`;
+      }
     }
   </script>
 </body>
