@@ -1,51 +1,57 @@
-# QR-petorca_municipalidad
-Permiso de Circulacion Petorca
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Validación de Datos</title>
   <style>
-    body { font-family: Arial; padding: 20px; }
+    body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
     input, button { margin: 10px 0; padding: 8px; width: 100%; }
+    .valido { color: green; }
+    .invalido { color: red; }
   </style>
 </head>
 <body>
-  <script>
-const datosValidos = {
-  "ABC123": {
-    nombre: "Juan Pérez",
-    estado: "Válido",
-    patente: "XY-1234",
-    vencimiento: "2025-12-31",
-    tipoVehiculo: "Camioneta",
-    comuna: "Petorca"
-  },
-  "XYZ789": {
-    nombre: "Ana Gómez",
-    estado: "Válido",
-    patente: "AB-9876",
-    vencimiento: "2025-10-15",
-    tipoVehiculo: "Sedán",
-    comuna: "Petorca"
-  }
-};
+  <h2>Validación de Permiso de Circulación</h2>
+  <label for="codigo">Ingrese su código:</label>
+  <input type="text" id="codigo" placeholder="Ej: ABC123">
+  <button onclick="validar()">Validar</button>
+  <div id="resultado"></div>
 
-  if (datos) {
-    resultado.innerHTML = `
-      <p><strong>Nombre:</strong> ${datos.nombre}</p>
-      <p><strong>Estado:</strong> ${datos.estado}</p>
-      <p><strong>Patente:</strong> ${datos.patente}</p>
-      <p><strong>Vencimiento:</strong> ${datos.vencimiento}</p>
-      <p><strong>Tipo de Vehículo:</strong> ${datos.tipoVehiculo}</p>
-      <p><strong>Comuna:</strong> ${datos.comuna}</p>
-    `;
-  } else {
-    resultado.innerHTML = "<p style='color:red;'>Código no válido</p>";
-  }
-} 
-    }
-  </script>
-</body>
-</html>
+  <script>
+    const datosValidos = {
+      "ABC123": {
+        nombre: "Juan Pérez",
+        estado: "Válido",
+        patente: "XY-1234",
+        vencimiento: "2025-12-31",
+        tipoVehiculo: "Camioneta",
+        comuna: "Petorca"
+      },
+      "XYZ789": {
+        nombre: "Ana Gómez",
+        estado: "Válido",
+        patente: "AB-9876",
+        vencimiento: "2025-10-15",
+        tipoVehiculo: "Sedán",
+        comuna: "Petorca"
+      }
+    };
+
+    function validar() {
+      const codigo = document.getElementById("codigo").value.trim();
+      const resultado = document.getElementById("resultado");
+      const datos = datosValidos[codigo];
+
+      if (datos) {
+        resultado.innerHTML = `
+          <div class="valido">
+            <p><strong>Nombre:</strong> ${datos.nombre}</p>
+            <p><strong>Estado:</strong> ${datos.estado}</p>
+            <p><strong>Patente:</strong> ${datos.patente}</p>
+            <p><strong>Vencimiento:</strong> ${datos.vencimiento}</p>
+            <p><strong>Tipo de Vehículo:</strong> ${datos.tipoVehiculo}</p>
+            <p><strong>Comuna:</strong> ${datos.comuna}</p>
+          </div>
+        `;
+      } else {
+        resultado.innerHTML = "<p class='invalido'>Código no válido</p>";
