@@ -12,12 +12,6 @@ Permiso de Circulacion Petorca
   </style>
 </head>
 <body>
-  <h2>Validación de Datos</h2>
-  <label for="codigo">Ingrese su código:</label>
-  <input type="text" id="codigo" placeholder="Ej: ABC123">
-  <button onclick="validar()">Validar</button>
-  <div id="resultado"></div>
-
   <script>
 const datosValidos = {
   "ABC123": {
@@ -50,9 +44,7 @@ const datosValidos = {
   } else {
     resultado.innerHTML = "<p style='color:red;'>Código no válido</p>";
   }
-} else {
-        resultado.innerHTML = "<p style='color:red;'>Código no válido</p>";
-      }
+} 
     }
   </script>
 </body>
