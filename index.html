@@ -1,116 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Validación de Permiso</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validación Permiso de Circulación</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
       margin: 0;
       padding: 0;
     }
+    header {
+      background-color: #006837;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      height: 80px;
+      vertical-align: middle;
+    }
     .container {
-      max-width: 500px;
-      margin: 50px auto;
-      background-color: #fff;
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 30px;
     }
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #34495e;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background-color: #2980b9;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #3498db;
-    }
-    .resultado {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 4px;
-    }
-    .valido {
+    .success {
       background-color: #dff0d8;
       color: #3c763d;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
     }
-    .invalido {
-      background-color: #f2dede;
-      color: #a94442;
+    .data-row {
+      margin: 10px 0;
+    }
+    .label {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Validación de Permiso</h2>
-    <label for="serie">Serie del documento</label>
-    <input type="text" id="serie" placeholder="Ej: 1119917">
-    
-    <label for="placa">Placa patente</label>
-    <input type="text" id="placa" placeholder="Ej: THZY34">
-    
-    <button onclick="validar()">Validar</button>
-    
-    <div id="resultado" class="resultado"></div>
+  <header>
+    <img src="logo_petorca.png" alt="Logo Municipalidad Petorca" />
+    <h1>Validación de Permiso de Circulación</h1>
+  </header>
+
+  <div class="container" id="resultado">
+    <div class="success">
+      ✅ Documento válidamente emitido con código de validación: <strong>1119917</strong>
+    </div>
+    <div class="data-row"><span class="label">Nro. Formulario:</span> 2025902718</div>
+    <div class="data-row"><span class="label">PPU:</span> THZY34</div>
+    <div class="data-row"><span class="label">Marca:</span> CITROEN</div>
+    <div class="data-row"><span class="label">Modelo:</span> BERLINGO</div>
+    <div class="data-row"><span class="label">Vencimiento:</span> 2025-09-01</div>
+    <div class="data-row"><span class="label">Tipo de Pago:</span> Primera Cuota 2025</div>
+    <div class="data-row"><span class="label">Fecha de Pago:</span> 2025-03-08</div>
+    <div class="data-row"><span class="label">Valor Pagado:</span> $162.832</div>
   </div>
-
-  <script>
-    const permisos = {
-      "1119917|THZY34": {
-        nombre: "Carlos Muñoz",
-        estado: "Válido",
-        vencimiento: "2025-12-31",
-        tipoVehiculo: "SUV",
-        comuna: "Petorca"
-      }
-    };
-
-    function validar() {
-      const serie = document.getElementById("serie").value.trim();
-      const placa = document.getElementById("placa").value.trim().toUpperCase();
-      const clave = `${serie}|${placa}`;
-      const resultado = document.getElementById("resultado");
-
-      if (permisos[clave]) {
-        const info = permisos[clave];
-        resultado.className = "resultado valido";
-        resultado.innerHTML = `
-          <p><strong>Nombre:</strong> ${info.nombre}</p>
-          <p><strong>Estado:</strong> ${info.estado}</p>
-          <p><strong>Vencimiento:</strong> ${info.vencimiento}</p>
-          <p><strong>Tipo de Vehículo:</strong> ${info.tipoVehiculo}</p>
-          <p><strong>Comuna:</strong> ${info.comuna}</p>
-        `;
-      } else {
-        resultado.className = "resultado invalido";
-        resultado.innerHTML = `<p>Permiso no válido. Verifique los datos ingresados.</p>`;
-      }
-    }
-  </script>
 </body>
 </html>
